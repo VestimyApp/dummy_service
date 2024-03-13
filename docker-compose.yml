@@ -1,0 +1,18 @@
+version: '3.4'
+services:
+  service:
+    image: service:latest
+    build: 
+      context: .
+      args:
+        - GIT_TOKEN=${GIT_TOKEN}
+        - BRANCH=${BRANCH:-main}
+    restart: on-failure:0
+    init: true
+    networks:
+      - service_network
+networks:
+    service_network:
+      name: service_network
+      external: true
+
